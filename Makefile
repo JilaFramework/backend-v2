@@ -6,3 +6,9 @@ build:
 
 upgrade:
 	bin/makefile/development-environment-upgrade
+
+pg-stop:
+	bin/makefile/pg-stop
+
+pg-start:
+	bin/makefile/pg-start
