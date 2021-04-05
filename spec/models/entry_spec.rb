@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Entry, type: :model do
+describe Entry do
   describe :published? do
     it 'should only return published records' do
       published_tomorrow = Entry.create(
