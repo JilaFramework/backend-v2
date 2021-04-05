@@ -24,6 +24,9 @@ Metrics/BlockLength:
     - lib/tasks/**/*
     - spec/**/*
 
+Style/Documentation:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
