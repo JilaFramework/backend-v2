@@ -27,7 +27,7 @@ Metrics/BlockLength:
 Style/Documentation:
   Enabled: false
 
-FrozenStringLiteralComment:
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
