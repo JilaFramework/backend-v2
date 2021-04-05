@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_05_023954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.string "entry_word"
+    t.string "word_type"
+    t.text "description"
+    t.boolean "published?"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "display_order"
+    t.string "pronunciation"
+    t.string "meaning"
+    t.string "example"
+    t.string "example_translation"
+  end
 
 end
