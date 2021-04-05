@@ -33,15 +33,41 @@ describe Api::SyncController do
     get '/api/sync/all'
 
     expect(response.status).to eq(200)
-    expect(JSON.parse(response.body)).to(
+    data = JSON.parse(response.body)
+    expect(data.keys.sort).to eq(%w[categories entries])
+    expect(data['categories']).to(
       eq(
-        'categories' => [
+        [
           { 'id' => 1, 'name' => 'cat a' },
           { 'id' => 2, 'name' => 'cat b' }
-        ],
-        'entries' => [
-          { 'categories' => [2], 'id' => 1 },
-          { 'categories' => [1], 'id' => 2 }
+        ]
+      )
+    )
+    expect(data['entries']).to(
+      eq(
+        [
+          {
+            'categories' => [2],
+            'description' => nil,
+            'entry_word' => 'word 1',
+            'example' => nil,
+            'example_translation' => nil,
+            'id' => 1,
+            'meaning' => 'one',
+            'pronunciation' => nil,
+            'word_type' => 'noun'
+          },
+          {
+            'categories' => [1],
+            'description' => nil,
+            'entry_word' => 'word 2',
+            'example' => nil,
+            'example_translation' => nil,
+            'id' => 2,
+            'meaning' => 'two',
+            'pronunciation' => nil,
+            'word_type' => 'noun'
+          }
         ]
       )
     )
