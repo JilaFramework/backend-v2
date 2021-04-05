@@ -1,0 +1,19 @@
+AllCops:
+  Exclude:
+    - config/**/*
+    - db/**/*
+    - node_modules/**/*
+    - bin/**/*
+    - Gemfile
+    - spec/rails_helper.rb
+    - Rakefile
+    - spec/spec_helper.rb
+    - app/models/application_record.rb
+    - app/helpers/application_helper.rb
+    - config.ru
+
+  NewCops: enable
+  TargetRubyVersion: 3.0
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
