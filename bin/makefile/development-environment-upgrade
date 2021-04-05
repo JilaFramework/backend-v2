@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+set -eu
+
+brew upgrade
+brew install gpg
+brew cleanup
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0 || echo "asdf already installed"
+. ~/.asdf/asdf.sh
+asdf plugin-add ruby || echo "ruby plugin already installed"
+asdf plugin-update ruby
+asdf plugin-add postgres || echo "postgres plugin already installed"
+asdf plugin-update postgres
+asdf plugin-add nodejs || echo "nodejs plugin already installed"
+asdf plugin-update nodejs
+bin/makefile/pg-stop
+export POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-uuid=e2fs
+export MAKELEVEL=0
+asdf install
+asdf global postgres "$(grep postgres .tool-versions | cut -d ' ' -f 2)"
+bin/makefile/pg-init
+bin/makefile/pg-start
+bundle install
