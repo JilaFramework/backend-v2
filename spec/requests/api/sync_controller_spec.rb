@@ -2,22 +2,30 @@ require 'rails_helper'
 
 describe Api::SyncController do
   before do
-    @tomorrow = Category.create name: 'tomorrow', position: 2, updated_at: Date.tomorrow
-    @yesterday = Category.create name: 'yesterday', position: 1, updated_at: Date.yesterday
-
-    @published = Entry.create(
-      entry_word: 'published',
-      word_type: 'noun',
-      meaning: 'published',
-      published?: true,
-      categories: [@yesterday]
+    @cat_b = Category.create(
+      id: 2,
+      name: 'cat b',
+      position: 2
     )
-    @unpublished = Entry.create(
-      entry_word: 'unpublished',
+    @cat_a = Category.create(
+      id: 1,
+      name: 'cat a',
+      position: 1
+    )
+
+    @entry_a = Entry.create(
+      id: 1,
+      entry_word: 'word 1',
       word_type: 'noun',
-      meaning: 'unpublished',
-      published?: false,
-      categories: [@tomorrow]
+      meaning: 'one',
+      categories: [@cat_b]
+    )
+    @entry_b = Entry.create(
+      id: 2,
+      entry_word: 'word 2',
+      word_type: 'noun',
+      meaning: 'two',
+      categories: [@cat_a]
     )
   end
 
@@ -25,6 +33,17 @@ describe Api::SyncController do
     get '/api/sync/all'
 
     expect(response.status).to eq(200)
-    expect(JSON.parse(response.body)).to eq({})
+    expect(JSON.parse(response.body)).to(
+      eq(
+        'categories' => [
+          { 'id' => 1, 'name' => 'cat a' },
+          { 'id' => 2, 'name' => 'cat b' }
+        ],
+        'entries' => [
+          { 'categories' => [2], 'id' => 1 },
+          { 'categories' => [1], 'id' => 2 }
+        ]
+      )
+    )
   end
 end

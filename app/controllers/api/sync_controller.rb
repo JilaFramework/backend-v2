@@ -1,7 +1,8 @@
 module Api
   class SyncController < ApplicationController
     def all
-      render json: {}
+      @entries = Entry.all.order(:id)
+      @categories = Category.all.order(:position)
     end
   end
 end

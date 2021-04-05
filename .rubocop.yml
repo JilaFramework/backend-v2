@@ -27,10 +27,13 @@ Metrics/BlockLength:
 Style/Documentation:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
+FrozenStringLiteralComment:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
+  Enabled: false
+
+RSpec/ExampleLength:
   Enabled: false
 
 RSpec/InstanceVariable:
